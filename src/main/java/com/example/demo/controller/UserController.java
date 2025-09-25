@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     // DI: dependency injection
-    private UserService userService;
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
@@ -24,7 +24,8 @@ public class UserController {
 
     @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
     public String createUserPage(@ModelAttribute("newUser") User user) {
-        System.out.println("run here " + user);
+        User newUser = userService.handleSaveUser(user);
+        System.out.println("run here " + newUser);
         return "client/home";
     }
 }
