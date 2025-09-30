@@ -23,17 +23,6 @@ public class OrderDetail {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    public OrderDetail() {
-    }
-
-    public OrderDetail(Long id, Long quantity, Double price, Order order, Product product) {
-        this.id = id;
-        this.quantity = quantity;
-        this.price = price;
-        this.order = order;
-        this.product = product;
-    }
-
     public Long getId() {
         return id;
     }

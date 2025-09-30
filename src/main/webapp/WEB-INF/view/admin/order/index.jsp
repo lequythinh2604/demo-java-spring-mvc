@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,28 +21,13 @@
     <div id="layoutSidenav_content">
         <main>
             <div class="container-fluid px-4">
-                <h1 class="mt-4">Manage Users</h1>
+                <h1 class="mt-4">Manage Orders</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Users</li>
+                    <li class="breadcrumb-item active">Orders</li>
                 </ol>
-                <div class="my-5">
-                    <div class="row">
-                        <div class="col-md-10 col-12 mx-auto">
-                            <h3>Delete User with ID = ${id}</h3>
-                            <hr/>
-                            <div class="alert alert-danger" role="alert">
-                                Are you sure to delete this user?
-                            </div>
-                            <form:form method="post" action="/admin/user/delete" modelAttribute="requestUser">
-                                <form:input type="hidden" class="form-control"
-                                            path="id" readonly="true"
-                                />
-                                <button type="submit" class="btn btn-danger">Confirm</button>
-                                <a href="/admin/user" class="btn btn-secondary">Back</a>
-                            </form:form>
-                        </div>
-                    </div>
+                <div class="mt-5">
+                    order table
                 </div>
             </div>
         </main>

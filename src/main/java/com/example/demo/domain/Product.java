@@ -25,23 +25,6 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<OrderDetail> orderDetails;
 
-    public Product() {
-    }
-
-    public Product(Long id, String name, String price, String image, String detailDesc, String shortDesc, Long quantity, Long sold, String factory, String target, List<OrderDetail> orderDetails) {
-        this.id = id;
-        this.name = name;
-        this.price = price;
-        this.image = image;
-        this.detailDesc = detailDesc;
-        this.shortDesc = shortDesc;
-        this.quantity = quantity;
-        this.sold = sold;
-        this.factory = factory;
-        this.target = target;
-        this.orderDetails = orderDetails;
-    }
-
     public List<OrderDetail> getOrderDetails() {
         return orderDetails;
     }
