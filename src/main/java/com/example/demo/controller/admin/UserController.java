@@ -3,10 +3,12 @@ package com.example.demo.controller.admin;
 import com.example.demo.domain.User;
 import com.example.demo.service.UploadService;
 import com.example.demo.service.UserService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import jakarta.validation.Valid;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,12 +26,6 @@ public class UserController {
         this.userService = userService;
         this.uploadService = uploadService;
         this.passwordEncoder = passwordEncoder;
-    }
-
-    @RequestMapping("/")
-    public void index(Model model) {
-//        List<User> listUser = userService.handleFindAllUsers();
-//        System.out.println(listUser);
     }
 
     @GetMapping("/admin/user")
@@ -55,7 +51,20 @@ public class UserController {
     }
 
     @PostMapping("/admin/user/create")
-    public String createUser(@ModelAttribute("newUser") User user, @RequestParam("avatarFile") MultipartFile file) {
+    public String createUser(@ModelAttribute("newUser") @Valid User user,
+                             BindingResult bindingResult,
+                             @RequestParam("avatarFile") MultipartFile file) {
+        // log errors
+        List<FieldError> fieldErrors = bindingResult.getFieldErrors();
+        for (FieldError fieldError : fieldErrors) {
+            System.out.println(">>> " + fieldError.getField() + " - " + fieldError.getDefaultMessage());
+        }
+
+        // check error
+        if (bindingResult.hasErrors()) {
+            return "admin/user/create";
+        }
+
         String avatar = this.uploadService.handleSaveUploadFile(file, "avatar");
         String hashPassword = this.passwordEncoder.encode(user.getPassword());
 

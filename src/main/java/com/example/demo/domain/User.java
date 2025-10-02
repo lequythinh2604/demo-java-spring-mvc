@@ -1,6 +1,7 @@
 package com.example.demo.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.util.List;
 
@@ -12,9 +13,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull(message = "Email không hợp lệ")
+    @Email(message = "Email không hợp lệ", regexp = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^.-]+@[azA-Z0-9.-]+$")
     private String email;
+
+    @NotNull
+    @Size(min = 3, message = "Password phải có tối thiếu 3 ký tự")
     private String password;
+
+    @NotNull
+    @Size(min = 3, max = 50, message = "FullName phải có từ 3-50 ký tự")
     private String fullName;
+
     private String address;
     private String phone;
     private String avatar;

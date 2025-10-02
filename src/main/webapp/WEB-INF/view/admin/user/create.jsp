@@ -36,7 +36,8 @@
                 <h1 class="mt-4">Manage Users</h1>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
-                    <li class="breadcrumb-item active">Users</li>
+                    <li class="breadcrumb-item active"><a href="/admin/user">Users</a></li>
+                    <li class="breadcrumb-item active">Create</li>
                 </ol>
                 <div class="my-5">
                     <div class="row">
@@ -47,28 +48,39 @@
                                 class="row" enctype="multipart/form-data"
                             >
                                 <div class="mb-3 col-12 col-md-6">
+                                    <c:set var="errorEmail">
+                                        <form:errors path="email" cssClass="invalid-feedback" />
+                                    </c:set>
                                     <label class="form-label">Email:</label>
-                                    <form:input type="email" class="form-control"
-                                                path="email"
-                                    />
+                                    <form:input type="email"
+                                                class="form-control ${not empty errorEmail ? 'is-invalid' : ''}"
+                                                path="email" />
+                                        ${errorEmail}
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
+                                    <c:set var="errorPassword">
+                                        <form:errors path="password" cssClass="invalid-feedback" />
+                                    </c:set>
                                     <label class="form-label">Password:</label>
-                                    <form:input type="password" class="form-control"
-                                                path="password"
-                                    />
+                                    <form:input type="password"
+                                                class="form-control ${not empty errorPassword ? 'is-invalid' : ''}"
+                                                path="password" />
+                                        ${errorPassword}
+
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
-                                    <label class="form-label">Phone:</label>
-                                    <form:input type="text" class="form-control"
-                                                path="phone"
-                                    />
+                                    <label class="form-label">Phone number:</label>
+                                    <form:input type="text" class="form-control" path="phone" />
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
+                                    <c:set var="errorFullName">
+                                        <form:errors path="fullName" cssClass="invalid-feedback" />
+                                    </c:set>
                                     <label class="form-label">Full Name:</label>
-                                    <form:input type="text" class="form-control"
-                                                path="fullName"
-                                    />
+                                    <form:input type="text"
+                                                class="form-control ${not empty errorFullName ? 'is-invalid' : ''}"
+                                                path="fullName" />
+                                        ${errorFullName}
                                 </div>
                                 <div class="mb-3">
                                     <label class="form-label">Address:</label>
@@ -84,7 +96,7 @@
                                     </form:select>
                                 </div>
                                 <div class="mb-3 col-12 col-md-6">
-                                    <label for="avatarFile" class="form-label">Default file input example</label>
+                                    <label for="avatarFile" class="form-label">Avatar:</label>
                                     <input class="form-control" type="file" id="avatarFile"
                                         accept=".png, .jpg, .jpeg" name="avatarFile">
                                 </div>
